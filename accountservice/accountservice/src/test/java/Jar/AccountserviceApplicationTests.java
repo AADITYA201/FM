@@ -1,5 +1,6 @@
 package com.financeme.accountservice;
 
+import com.financeme.accountservice.AccountserviceApplication;  // Import the main application class
 import com.financeme.accountservice.entity.Account;
 import com.financeme.accountservice.service.AccountService;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = AccountserviceApplication.class)
+@SpringBootTest(classes = AccountserviceApplication.class)  // Explicitly specify the main application class
 public class AccountServiceTest {
 
     @Autowired
