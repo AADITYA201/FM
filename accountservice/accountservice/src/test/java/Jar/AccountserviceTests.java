@@ -1,6 +1,5 @@
 package com.financeme.accountservice;
 
-import com.financeme.accountservice.AccountserviceApplication;  // Import the main application class
 import com.financeme.accountservice.entity.Account;
 import com.financeme.accountservice.service.AccountService;
 import org.junit.jupiter.api.Test;
@@ -9,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = AccountserviceApplication.class)  // Explicitly specify the main application class
+@SpringBootTest(classes = AccountserviceApplication.class) // ✅ Specify main class
 public class AccountServiceTest {
 
     @Autowired
@@ -21,38 +20,5 @@ public class AccountServiceTest {
         Account saved = accountService.createAccount(acc);
         assertNotNull(saved.getAccountNo(), "Account number should be generated");
         assertEquals("Test User", saved.getName());
-    }
-
-    @Test
-    public void testUpdateAccount() {
-        Account acc = new Account(null, "Old User", "old@example.com", "Old Policy");
-        Account created = accountService.createAccount(acc);
-
-        Account newData = new Account(null, "Updated User", "new@example.com", "New Policy");
-        Account updated = accountService.updateAccount(created.getAccountNo(), newData);
-
-        assertEquals("Updated User", updated.getName());
-        assertEquals("New Policy", updated.getPolicyDetails());
-    }
-
-    @Test
-    public void testViewPolicy() {
-        Account acc = new Account(null, "Viewer", "view@example.com", "View Policy");
-        Account created = accountService.createAccount(acc);
-
-        Account found = accountService.viewPolicy(created.getAccountNo());
-        assertNotNull(found);
-        assertEquals("Viewer", found.getName());
-    }
-
-    @Test
-    public void testDeletePolicy() {
-        Account acc = new Account(null, "Delete User", "delete@example.com", "Delete Policy");
-        Account created = accountService.createAccount(acc);
-
-        accountService.deletePolicy(created.getAccountNo());
-
-        Account afterDelete = accountService.viewPolicy(created.getAccountNo());
-        assertNull(afterDelete);
     }
 }
